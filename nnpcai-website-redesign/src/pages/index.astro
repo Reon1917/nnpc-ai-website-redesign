@@ -1,0 +1,236 @@
+---
+import Layout from "../layouts/main.astro";
+import HeroCarousel from "../components/HeroCarousel";
+import tier1 from "../assets/aipc-images/aipc-tier1.png";
+import tier2 from "../assets/aipc-images/aipc-tier2.png";
+import tier3 from "../assets/aipc-images/aipc-tier3.png";
+
+const tiers = [
+	{
+		label: "Tier 01",
+		title: "Edge Intelligence",
+		description: "Compact inference stacks built for rugged industrial sites.",
+		image: tier1.src,
+		width: tier1.width,
+		height: tier1.height,
+	},
+	{
+		label: "Tier 02",
+		title: "Core Accelerator",
+		description: "GPU-optimized processing for vision, robotics, and analytics.",
+		image: tier2.src,
+		width: tier2.width,
+		height: tier2.height,
+	},
+	{
+		label: "Tier 03",
+		title: "AI Command",
+		description: "Unified orchestration for multi-site AI infrastructure.",
+		image: tier3.src,
+		width: tier3.width,
+		height: tier3.height,
+	},
+];
+
+const services = [
+	{
+		tag: "Advisory",
+		title: "AI Strategy & Governance",
+		description:
+			"Roadmaps, risk frameworks, and ROI modeling tailored to industrial operations.",
+		placeholder: "Strategy Deck",
+	},
+	{
+		tag: "Engineering",
+		title: "Automation & Vision Systems",
+		description:
+			"Production-grade models that scale from pilot lines to global factories.",
+		placeholder: "Vision Stack",
+	},
+	{
+		tag: "Delivery",
+		title: "Managed AI Operations",
+		description:
+			"24/7 monitoring, model stewardship, and lifecycle support for mission teams.",
+		placeholder: "Ops Console",
+	},
+];
+
+const logos = [
+	"Mitsubishi",
+	"Chin Chun Enterprise",
+	"True",
+	"Siemens",
+	"Bosch",
+	"Honeywell",
+	"Schneider Electric",
+	"FANUC",
+	"ABB",
+	"Hitachi",
+	"Panasonic",
+	"Foxconn",
+];
+---
+
+<Layout title="NNPC AI Consulting">
+	<div class="relative">
+		<header class="mx-auto w-full max-w-6xl px-6 pt-8">
+			<div class="grid items-center gap-6 md:grid-cols-[1fr_auto_1fr]">
+				<nav
+					class="flex flex-wrap items-center gap-5 text-xs uppercase tracking-[0.3em] text-slate-300"
+				>
+					<a class="text-white transition hover:text-amber-200" href="#">Home</a>
+					<a class="transition hover:text-amber-200" href="#">About</a>
+					<a class="transition hover:text-amber-200" href="#">Solutions</a>
+				</nav>
+				<div class="flex items-center justify-center">
+					<div class="font-display text-lg tracking-[0.45em] text-white">
+						<span class="text-amber-300">N</span>NPC
+					</div>
+				</div>
+				<nav
+					class="flex flex-wrap items-center justify-start gap-5 text-xs uppercase tracking-[0.3em] text-slate-300 md:justify-end"
+				>
+					<a class="transition hover:text-amber-200" href="#">Products</a>
+					<a class="transition hover:text-amber-200" href="#">Articles</a>
+					<a class="transition hover:text-amber-200" href="#">Contact</a>
+				</nav>
+			</div>
+		</header>
+
+		<main class="mx-auto max-w-6xl px-6 pb-20 pt-10">
+			<section class="grid items-center gap-10 md:grid-cols-[1.15fr_0.85fr]">
+				<div class="float-in space-y-6">
+					<p
+						class="text-xs uppercase tracking-[0.4em] text-amber-200/80"
+					>
+						NNPC AI Consulting
+					</p>
+					<h1 class="font-display text-4xl leading-tight text-white md:text-5xl">
+						Intelligent infrastructure for the industries that power tomorrow.
+					</h1>
+					<p class="max-w-xl text-base text-slate-300">
+						We design AI systems that move from pilot to production without
+						friction, pairing industrial-grade hardware with clear governance.
+					</p>
+					<div class="flex flex-wrap gap-4">
+						<a
+							class="inline-flex items-center justify-center rounded-full bg-amber-300 px-5 py-2 text-sm font-semibold text-slate-900 shadow-lg shadow-amber-400/30 transition hover:-translate-y-0.5"
+							href="#"
+						>
+							Request Demo
+						</a>
+						<a
+							class="inline-flex items-center justify-center rounded-full border border-white/20 px-5 py-2 text-sm font-semibold text-white/90 transition hover:border-white/40 hover:bg-white/10"
+							href="#"
+						>
+							Explore Solutions
+						</a>
+					</div>
+					<div class="grid gap-4 pt-6 text-sm text-slate-300 sm:grid-cols-3">
+						<div class="glass-panel rounded-2xl p-4">
+							<p class="text-xs uppercase tracking-[0.3em] text-slate-400">
+								Focus
+							</p>
+							<p class="mt-2 text-base text-white">Industrial AI</p>
+						</div>
+						<div class="glass-panel rounded-2xl p-4">
+							<p class="text-xs uppercase tracking-[0.3em] text-slate-400">
+								Reach
+							</p>
+							<p class="mt-2 text-base text-white">APAC + Global</p>
+						</div>
+						<div class="glass-panel rounded-2xl p-4">
+							<p class="text-xs uppercase tracking-[0.3em] text-slate-400">
+								Model
+							</p>
+							<p class="mt-2 text-base text-white">Trusted Partner</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="float-in-delayed">
+					<div class="mx-auto w-full max-w-md">
+						<HeroCarousel client:load tiers={tiers} />
+					</div>
+					<div
+						class="mt-4 flex items-center justify-between text-[0.65rem] uppercase tracking-[0.3em] text-slate-400"
+					>
+						<span>Tiered AIPC Systems</span>
+						<span>03 Cards</span>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<section class="border-y border-white/10 bg-white/5 py-10">
+			<div class="mx-auto max-w-6xl px-6">
+				<div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+					<p class="text-xs uppercase tracking-[0.35em] text-slate-400">
+						Trusted By Industry Leaders
+					</p>
+					<p class="text-sm text-slate-400">
+						Global manufacturers and logistics operators rely on NNPC AI.
+					</p>
+				</div>
+			</div>
+			<div class="mt-8 marquee">
+				<div class="marquee__track">
+					{logos.map((logo) => (
+						<div class="marquee__item">{logo}</div>
+					))}
+					{logos.map((logo) => (
+						<div class="marquee__item" aria-hidden="true">
+							{logo}
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="mx-auto max-w-6xl px-6 pb-20">
+			<div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+				<div>
+					<p class="text-xs uppercase tracking-[0.35em] text-amber-200/70">
+						Featured Services
+					</p>
+					<h2 class="font-display mt-3 text-3xl text-white">
+						AI Consulting That Moves the Needle
+					</h2>
+					<p class="mt-2 max-w-xl text-sm text-slate-300">
+						Strategic guidance, engineering execution, and operational support
+						built for high-stakes industrial environments.
+					</p>
+				</div>
+				<a
+					class="inline-flex items-center justify-center rounded-full border border-white/20 px-5 py-2 text-sm font-semibold text-white/90 transition hover:border-white/40 hover:bg-white/10"
+					href="#"
+				>
+					View All Services
+				</a>
+			</div>
+
+			<div class="mt-10 grid gap-6 md:grid-cols-3">
+				{services.map((service) => (
+					<article class="glass-panel rounded-2xl p-6">
+						<div class="relative h-40 overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-amber-400/30 via-white/5 to-emerald-400/20">
+							<div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.35),_transparent_60%)]"></div>
+							<div class="absolute bottom-4 left-4 text-xs uppercase tracking-[0.3em] text-white/80">
+								{service.placeholder}
+							</div>
+						</div>
+						<p class="mt-5 text-xs uppercase tracking-[0.35em] text-emerald-200/80">
+							{service.tag}
+						</p>
+						<h3 class="mt-2 text-xl font-semibold text-white">
+							{service.title}
+						</h3>
+						<p class="mt-2 text-sm text-slate-300">
+							{service.description}
+						</p>
+					</article>
+				))}
+			</div>
+		</section>
+	</div>
+</Layout>
