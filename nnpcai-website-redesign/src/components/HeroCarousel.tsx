@@ -62,7 +62,7 @@ export default function HeroCarousel({ tiers }: HeroCarouselProps) {
                     />
                   </AspectRatio>
                   <div className="mt-4 space-y-2">
-                    <p className="text-xs uppercase tracking-[0.3em] text-amber-200/80">
+                    <p className="font-mono text-xs uppercase tracking-[0.3em] text-amber-200/80">
                       {tier.label}
                     </p>
                     <h3 className="text-lg font-semibold">{tier.title}</h3>
