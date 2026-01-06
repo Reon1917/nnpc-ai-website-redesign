@@ -1,0 +1,110 @@
+---
+const { eyebrow, title } = Astro.props;
+---
+
+<section class="nnpc-section" id="consultation">
+	<div class="mx-auto max-w-5xl px-6 py-14">
+		<div class="nnpc-panel rounded-3xl p-6 md:p-8">
+			<div class="text-center">
+				<p class="text-sm uppercase tracking-[0.2em] text-amber-800">
+					{eyebrow}
+				</p>
+				<h3 class="font-display mt-4 text-3xl text-neutral-900">
+					{title}
+				</h3>
+			</div>
+
+			<form
+				class="mt-8 grid gap-5 md:grid-cols-2"
+				action="#"
+				method="POST"
+				onsubmit="alert('Thank you. Your request has been simulated.'); return false;"
+			>
+				<div>
+					<label class="nnpc-field-label" for="name">Full Name</label>
+					<input
+						class="nnpc-field"
+						type="text"
+						id="name"
+						name="name"
+						placeholder="John Doe"
+						required
+					/>
+				</div>
+				<div>
+					<label class="nnpc-field-label" for="company">Company Name</label>
+					<input
+						class="nnpc-field"
+						type="text"
+						id="company"
+						name="company"
+						placeholder="Your Organization"
+						required
+					/>
+				</div>
+				<div>
+					<label class="nnpc-field-label" for="email">Business Email</label>
+					<input
+						class="nnpc-field"
+						type="email"
+						id="email"
+						name="email"
+						placeholder="john@company.com"
+						required
+					/>
+				</div>
+				<div>
+					<label class="nnpc-field-label" for="phone">Phone Number</label>
+					<input
+						class="nnpc-field"
+						type="tel"
+						id="phone"
+						name="phone"
+						placeholder="+66"
+						required
+					/>
+				</div>
+				<div>
+					<label class="nnpc-field-label" for="industry">Your Industry</label>
+					<select class="nnpc-field" id="industry" name="industry">
+						<option value="" disabled selected>
+							Select an industry
+						</option>
+						<option value="manufacturing">Precision Manufacturing</option>
+						<option value="accounting">Accounting &amp; Audit</option>
+						<option value="aviation">Aviation &amp; Logistics</option>
+						<option value="medical">Medical &amp; Dental</option>
+						<option value="estate">Smart Estate</option>
+						<option value="other">Other</option>
+					</select>
+				</div>
+				<div>
+					<label class="nnpc-field-label" for="interest">Primary Interest</label>
+					<select class="nnpc-field" id="interest" name="interest">
+						<option value="" disabled selected>
+							Select service type
+						</option>
+						<option value="consulting">Industrial Consulting</option>
+						<option value="server">Private AI Server Setup</option>
+						<option value="audit">Full Diagnostic Audit</option>
+					</select>
+				</div>
+				<div class="md:col-span-2">
+					<label class="nnpc-field-label" for="message">
+						Brief Project Details
+					</label>
+					<textarea
+						class="nnpc-field"
+						id="message"
+						name="message"
+						rows="4"
+						placeholder="Tell us about your current challenges..."
+					></textarea>
+				</div>
+				<button class="nnpc-btn nnpc-btn-primary md:col-span-2" type="submit">
+					Request Consultation
+				</button>
+			</form>
+		</div>
+	</div>
+</section>

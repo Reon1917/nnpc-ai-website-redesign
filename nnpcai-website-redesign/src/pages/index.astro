@@ -4,6 +4,12 @@ import heroImage from "../assets/hero-image/nnpc_hero_img_3.png";
 import companyLogo from "../assets/company-logos/ccEnterprise.png";
 import { getEntry } from "astro:content";
 import type { CollectionEntry } from "astro:content";
+import Hero from "../components/homePage/hero";
+import About from "../components/homePage/about";
+import Partners from "../components/homePage/partners";
+import Industries from "../components/homePage/industries";
+import Consultation from "../components/homePage/consultation.astro";
+import Footer from "../components/homePage/footer";
 
 type HomeEntry = CollectionEntry<"home">;
 type HomeData = HomeEntry["data"];
@@ -25,12 +31,12 @@ const getHomeEntry = async <T extends HomeSection>(section: T) => {
 };
 
 const heroEntry = await getHomeEntry("hero");
-const { Content: HeroContent } = await heroEntry.render();
 const hero = heroEntry.data;
+const heroHtml = heroEntry.rendered?.html ?? "";
 
 const aboutEntry = await getHomeEntry("about");
-const { Content: AboutContent } = await aboutEntry.render();
 const about = aboutEntry.data;
+const aboutHtml = aboutEntry.rendered?.html ?? "";
 
 const partnersEntry = await getHomeEntry("partners");
 const partners = partnersEntry.data;
@@ -48,277 +54,49 @@ const footer = footerEntry.data;
 
 <Layout title="NNPC AI - Industrial Automation & Intelligence">
 	<div class="nnpc-page">
-		<header class="nnpc-hero">
-			<img
-				class="nnpc-hero-media"
-				src={heroImage.src}
-				width={heroImage.width}
-				height={heroImage.height}
-				alt=""
-				loading="eager"
-				decoding="async"
-				aria-hidden="true"
-			/>
-			<div class="nnpc-hero-overlay" aria-hidden="true"></div>
-			<div class="nnpc-hero-inner relative z-10 mx-auto flex w-full max-w-6xl items-center justify-center px-6 py-12">
-				<div class="nnpc-hero-main space-y-5 text-center" data-reveal>
-					<p class="text-xs uppercase tracking-[0.4em] text-amber-800">
-						{hero.eyebrow}
-					</p>
-					<h1 class="font-display text-5xl leading-tight text-neutral-900 md:text-6xl">
-						{hero.title}
-					</h1>
-					<p class="text-lg font-semibold text-amber-800 md:text-xl">
-						{hero.lead}
-					</p>
-					<div class="text-base text-neutral-700 md:text-lg">
-						<HeroContent />
-					</div>
-					<div class="flex flex-wrap justify-center gap-4">
-						<a class="nnpc-btn nnpc-btn-primary" href="#consultation">
-							{hero.ctaPrimary}
-						</a>
-						<a class="nnpc-btn nnpc-btn-outline" href="#industries">
-							{hero.ctaSecondary}
-						</a>
-					</div>
-				</div>
-			</div>
-		</header>
+		<Hero
+			eyebrow={hero.eyebrow}
+			title={hero.title}
+			lead={hero.lead}
+			bodyHtml={heroHtml}
+			ctaPrimary={hero.ctaPrimary}
+			ctaSecondary={hero.ctaSecondary}
+			imageSrc={heroImage.src}
+			imageWidth={heroImage.width}
+			imageHeight={heroImage.height}
+		/>
 
-		<section class="nnpc-section nnpc-section-light" id="about">
-			<div class="mx-auto grid max-w-6xl gap-8 px-6 py-14 lg:grid-cols-[1.05fr_0.95fr]">
-				<div class="space-y-4" data-reveal>
-					<p class="text-xs uppercase tracking-[0.35em] text-neutral-600">
-						{about.eyebrow}
-					</p>
-					<h2 class="font-display text-4xl text-neutral-900">
-						{about.title}
-					</h2>
-					<div class="space-y-4 text-base text-neutral-600">
-						<AboutContent />
-					</div>
-					<div class="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-amber-800">
-						<span class="nnpc-dot nnpc-dot-dark"></span>
-						{about.accent}
-					</div>
-				</div>
-				<div class="relative" data-reveal style="--delay: 140ms;">
-					<div class="nnpc-image-frame">
-						<div class="nnpc-image-placeholder">
-							<span>Image Placeholder</span>
-						</div>
-					</div>
-					<div class="nnpc-caption">{about.caption}</div>
-				</div>
-			</div>
-		</section>
+		<About
+			eyebrow={about.eyebrow}
+			title={about.title}
+			accent={about.accent}
+			caption={about.caption}
+			bodyHtml={aboutHtml}
+		/>
 
-		<section class="nnpc-section" id="partners">
-			<div class="mx-auto max-w-6xl px-6 py-14">
-				<div class="text-center" data-reveal>
-					<p class="text-xs uppercase tracking-[0.35em] text-amber-800">
-						{partners.eyebrow}
-					</p>
-					<h2 class="font-display mt-4 text-4xl text-neutral-900">
-						{partners.title}
-					</h2>
-					<p class="mt-4 text-sm text-neutral-600">
-						{partners.description}
-					</p>
-				</div>
+		<Partners
+			eyebrow={partners.eyebrow}
+			title={partners.title}
+			description={partners.description}
+			items={partners.items}
+		/>
 
-				<div class="mt-8 grid gap-6 md:grid-cols-3">
-					{partners.items.map((partner, index) => (
-						<article
-							class="nnpc-panel flex h-full flex-col gap-5 rounded-2xl p-6"
-							data-reveal
-							style={`--delay: ${index * 120}ms;`}
-						>
-							<div class="nnpc-partner-image">
-								<div class="nnpc-partner-placeholder">
-									<span>{partner.placeholder}</span>
-								</div>
-							</div>
-							<div>
-								<h3 class="text-xl font-semibold text-neutral-900">
-									{partner.name}
-								</h3>
-								<p class="mt-1 text-xs uppercase tracking-[0.3em] text-amber-800">
-									{partner.role}
-								</p>
-							</div>
-							<p class="text-sm text-neutral-600">{partner.description}</p>
-						</article>
-					))}
-				</div>
-			</div>
-		</section>
+		<Industries
+			eyebrow={industries.eyebrow}
+			title={industries.title}
+			items={industries.items}
+		/>
 
-		<section class="nnpc-section nnpc-section-dark" id="industries">
-			<div class="nnpc-grid" aria-hidden="true"></div>
-			<div class="mx-auto max-w-6xl px-6 py-14">
-				<div class="text-center" data-reveal>
-					<p class="text-xs uppercase tracking-[0.35em] text-amber-800">
-						{industries.eyebrow}
-					</p>
-					<h2 class="font-display mt-4 text-4xl text-neutral-900">
-						{industries.title}
-					</h2>
-				</div>
+		<Consultation eyebrow={consultation.eyebrow} title={consultation.title} />
 
-				<div class="mt-8 grid gap-6 md:grid-cols-2">
-					{industries.items.map((industry, index) => (
-						<article
-							class="nnpc-industry-card"
-							data-reveal
-							style={`--delay: ${index * 100}ms;`}
-						>
-							<h3 class="text-xl font-semibold text-neutral-900">
-								{industry.title}
-							</h3>
-							<div class="mt-5 space-y-4 text-sm text-neutral-700">
-								<div>
-									<span class="nnpc-label nnpc-label-problem">The Problem</span>
-									<p class="mt-2 text-neutral-600">{industry.problem}</p>
-								</div>
-								<div>
-									<span class="nnpc-label nnpc-label-solution">The Solution</span>
-									<p class="mt-2 text-neutral-700">{industry.solution}</p>
-								</div>
-							</div>
-						</article>
-					))}
-				</div>
-			</div>
-		</section>
-
-		<section class="nnpc-section" id="consultation">
-			<div class="mx-auto max-w-5xl px-6 py-14" data-reveal>
-				<div class="nnpc-panel rounded-3xl p-6 md:p-8">
-					<div class="text-center">
-						<p class="text-xs uppercase tracking-[0.35em] text-amber-800">
-							{consultation.eyebrow}
-						</p>
-						<h3 class="font-display mt-4 text-3xl text-neutral-900">
-							{consultation.title}
-						</h3>
-					</div>
-
-					<form
-						class="mt-8 grid gap-5 md:grid-cols-2"
-						action="#"
-						method="POST"
-						onsubmit="alert('Thank you. Your request has been simulated.'); return false;"
-					>
-						<div>
-							<label class="nnpc-field-label" for="name">Full Name</label>
-							<input
-								class="nnpc-field"
-								type="text"
-								id="name"
-								name="name"
-								placeholder="John Doe"
-								required
-							/>
-						</div>
-						<div>
-							<label class="nnpc-field-label" for="company">Company Name</label>
-							<input
-								class="nnpc-field"
-								type="text"
-								id="company"
-								name="company"
-								placeholder="Your Organization"
-								required
-							/>
-						</div>
-						<div>
-							<label class="nnpc-field-label" for="email">Business Email</label>
-							<input
-								class="nnpc-field"
-								type="email"
-								id="email"
-								name="email"
-								placeholder="john@company.com"
-								required
-							/>
-						</div>
-						<div>
-							<label class="nnpc-field-label" for="phone">Phone Number</label>
-							<input
-								class="nnpc-field"
-								type="tel"
-								id="phone"
-								name="phone"
-								placeholder="+66"
-								required
-							/>
-						</div>
-						<div>
-							<label class="nnpc-field-label" for="industry">Your Industry</label>
-							<select class="nnpc-field" id="industry" name="industry">
-								<option value="" disabled selected>
-									Select an industry
-								</option>
-								<option value="manufacturing">Precision Manufacturing</option>
-								<option value="accounting">Accounting &amp; Audit</option>
-								<option value="aviation">Aviation &amp; Logistics</option>
-								<option value="medical">Medical &amp; Dental</option>
-								<option value="estate">Smart Estate</option>
-								<option value="other">Other</option>
-							</select>
-						</div>
-						<div>
-							<label class="nnpc-field-label" for="interest">Primary Interest</label>
-							<select class="nnpc-field" id="interest" name="interest">
-								<option value="" disabled selected>
-									Select service type
-								</option>
-								<option value="consulting">Industrial Consulting</option>
-								<option value="server">Private AI Server Setup</option>
-								<option value="audit">Full Diagnostic Audit</option>
-							</select>
-						</div>
-						<div class="md:col-span-2">
-							<label class="nnpc-field-label" for="message">
-								Brief Project Details
-							</label>
-							<textarea
-								class="nnpc-field"
-								id="message"
-								name="message"
-								rows="4"
-								placeholder="Tell us about your current challenges..."
-							></textarea>
-						</div>
-						<button class="nnpc-btn nnpc-btn-primary md:col-span-2" type="submit">
-							Request Consultation
-						</button>
-					</form>
-				</div>
-			</div>
-		</section>
-
-		<footer class="nnpc-footer">
-			<div class="mx-auto max-w-5xl px-6 py-10 text-center">
-				<a class="inline-flex items-center justify-center" href="#" aria-label="NNPC AI">
-					<img
-						src={companyLogo.src}
-						width={companyLogo.width}
-						height={companyLogo.height}
-						alt="Chin Chun Enterprise logo"
-						class="h-12 w-auto"
-						loading="lazy"
-					/>
-				</a>
-				<p class="mt-4 text-sm text-neutral-600">{footer.blurb}</p>
-				<p
-					class="mt-4 text-xs uppercase tracking-[0.3em] text-neutral-600"
-					set:html={footer.legal}
-				></p>
-			</div>
-		</footer>
+		<Footer
+			logoSrc={companyLogo.src}
+			logoWidth={companyLogo.width}
+			logoHeight={companyLogo.height}
+			logoAlt="Chin Chun Enterprise logo"
+			blurb={footer.blurb}
+			legalHtml={footer.legal}
+		/>
 	</div>
 </Layout>
 
@@ -424,9 +202,9 @@ const footer = footerEntry.data;
 		justify-content: center;
 		padding: 0.9rem 2rem;
 		border-radius: 0.35rem;
-		font-size: 0.75rem;
+		font-size: 0.85rem;
 		font-weight: 700;
-		letter-spacing: 0.2em;
+		letter-spacing: 0.12em;
 		text-transform: uppercase;
 		transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 	}
@@ -517,15 +295,15 @@ const footer = footerEntry.data;
 		height: 100%;
 		background: linear-gradient(135deg, rgba(241, 200, 75, 0.22), rgba(255, 255, 255, 0.9));
 		color: rgba(22, 18, 10, 0.7);
-		font-size: 0.75rem;
-		letter-spacing: 0.35em;
+		font-size: 0.85rem;
+		letter-spacing: 0.2em;
 		text-transform: uppercase;
 	}
 
 	.nnpc-caption {
 		margin-top: 1rem;
-		font-size: 0.7rem;
-		letter-spacing: 0.2em;
+		font-size: 0.8rem;
+		letter-spacing: 0.16em;
 		text-transform: uppercase;
 		color: var(--gold-ink);
 	}
@@ -558,8 +336,8 @@ const footer = footerEntry.data;
 		align-items: center;
 		justify-content: center;
 		color: var(--gold-ink);
-		font-size: 0.7rem;
-		letter-spacing: 0.3em;
+		font-size: 0.8rem;
+		letter-spacing: 0.18em;
 		text-transform: uppercase;
 	}
 
@@ -582,9 +360,8 @@ const footer = footerEntry.data;
 		display: inline-flex;
 		align-items: center;
 		gap: 0.4rem;
-		font-size: 0.7rem;
-		letter-spacing: 0.2em;
-		text-transform: uppercase;
+		font-size: 0.85rem;
+		letter-spacing: 0.12em;
 		font-weight: 700;
 	}
 
@@ -598,9 +375,8 @@ const footer = footerEntry.data;
 
 	.nnpc-field-label {
 		display: block;
-		font-size: 0.7rem;
-		letter-spacing: 0.2em;
-		text-transform: uppercase;
+		font-size: 0.85rem;
+		letter-spacing: 0.06em;
 		color: rgba(30, 24, 16, 0.7);
 		margin-bottom: 0.5rem;
 	}
