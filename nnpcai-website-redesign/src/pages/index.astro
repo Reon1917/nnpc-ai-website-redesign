@@ -1,60 +1,48 @@
 ---
 import Layout from "../layouts/main.astro";
-import heroImage from "../assets/hero-image/NNPC_hero_img_1.png";
+import heroImage from "../assets/hero-image/nnpc_hero_img_3.png";
 import companyLogo from "../assets/company-logos/ccEnterprise.png";
+import { getEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
-const partners = [
-	{
-		name: "GIGABYTE",
-		role: "Hardware Core",
-		description:
-			"Our official workstation partner, delivering private NVIDIA-powered compute for secure on-prem control.",
-		placeholder: "Hardware",
-	},
-	{
-		name: "SAT",
-		role: "Industrial Core",
-		description:
-			"Automation specialists behind the MOM system that streamlines complex industrial workflows.",
-		placeholder: "Industrial",
-	},
-	{
-		name: "TIGER AI",
-		role: "Software Core",
-		description:
-			"High-frequency AI tools that modernize teams and accelerate daily tasks.",
-		placeholder: "Software",
-	},
-];
+type HomeEntry = CollectionEntry<"home">;
+type HomeData = HomeEntry["data"];
+type HomeSection = HomeData["section"];
+type HomeDataBySection<T extends HomeSection> = Extract<HomeData, { section: T }>;
+type HomeEntryBySection<T extends HomeSection> = Omit<HomeEntry, "data"> & {
+	data: HomeDataBySection<T>;
+};
 
-const industries = [
-	{
-		title: "Precision Manufacturing",
-		problem: "High scrap rates and labor shortages.",
-		solution: "AI-driven quality control that automatically identifies waste.",
-	},
-	{
-		title: "Accounting & Audit",
-		problem: "Repetitive manual data entry.",
-		solution: "Double efficiency and complete weekly audits in days, not weeks.",
-	},
-	{
-		title: "Aviation & Logistics",
-		problem: "Unexpected downtime and constant firefighting.",
-		solution: "Predictive analytics that reduce ground maintenance time by 20%.",
-	},
-	{
-		title: "Medical & Dental",
-		problem: "Inefficient patient data workflows.",
-		solution: "Streamlined AI tools adapted for fast-paced clinical environments.",
-	},
-	{
-		title: "Smart Estate",
-		problem: "Disconnected management of large facilities.",
-		solution:
-			"A unified ecosystem connecting utilities, security, and operations for industrial parks.",
-	},
-];
+const getHomeEntry = async <T extends HomeSection>(section: T) => {
+	const entry = await getEntry("home", section);
+	if (!entry) {
+		throw new Error(`Missing home ${section} content.`);
+	}
+	if (entry.data.section !== section) {
+		throw new Error(`Mismatched home ${section} content.`);
+	}
+	return entry as HomeEntryBySection<T>;
+};
+
+const heroEntry = await getHomeEntry("hero");
+const { Content: HeroContent } = await heroEntry.render();
+const hero = heroEntry.data;
+
+const aboutEntry = await getHomeEntry("about");
+const { Content: AboutContent } = await aboutEntry.render();
+const about = aboutEntry.data;
+
+const partnersEntry = await getHomeEntry("partners");
+const partners = partnersEntry.data;
+
+const industriesEntry = await getHomeEntry("industries");
+const industries = industriesEntry.data;
+
+const consultationEntry = await getHomeEntry("consultation");
+const consultation = consultationEntry.data;
+
+const footerEntry = await getHomeEntry("footer");
+const footer = footerEntry.data;
 
 ---
 
@@ -74,25 +62,24 @@ const industries = [
 			<div class="nnpc-hero-overlay" aria-hidden="true"></div>
 			<div class="nnpc-hero-inner relative z-10 mx-auto flex w-full max-w-6xl items-center justify-center px-6 py-12">
 				<div class="nnpc-hero-main space-y-5 text-center" data-reveal>
-					<p class="text-xs uppercase tracking-[0.4em] text-amber-200/80">
-						Industrial Automation & Intelligence
+					<p class="text-xs uppercase tracking-[0.4em] text-amber-700">
+						{hero.eyebrow}
 					</p>
-					<h1 class="font-display text-5xl leading-tight text-amber-200 md:text-6xl">
-						NNPC AI
+					<h1 class="font-display text-5xl leading-tight text-neutral-900 md:text-6xl">
+						{hero.title}
 					</h1>
-					<p class="text-lg font-semibold text-amber-100 md:text-xl">
-						Own your AI. Protect your operations.
+					<p class="text-lg font-semibold text-amber-800 md:text-xl">
+						{hero.lead}
 					</p>
-					<p class="text-base text-slate-200 md:text-lg">
-						Industrial consulting and private AI server setups for businesses
-						focused on operational sovereignty.
-					</p>
+					<div class="text-base text-neutral-700 md:text-lg">
+						<HeroContent />
+					</div>
 					<div class="flex flex-wrap justify-center gap-4">
 						<a class="nnpc-btn nnpc-btn-primary" href="#consultation">
-							Get a Free Consultation
+							{hero.ctaPrimary}
 						</a>
 						<a class="nnpc-btn nnpc-btn-outline" href="#industries">
-							View Solutions
+							{hero.ctaSecondary}
 						</a>
 					</div>
 				</div>
@@ -103,25 +90,17 @@ const industries = [
 			<div class="mx-auto grid max-w-6xl gap-8 px-6 py-14 lg:grid-cols-[1.05fr_0.95fr]">
 				<div class="space-y-4" data-reveal>
 					<p class="text-xs uppercase tracking-[0.35em] text-neutral-500">
-						Global Tech, Local Execution
+						{about.eyebrow}
 					</p>
 					<h2 class="font-display text-4xl text-neutral-900">
-						Proven systems, deployed fast.
+						{about.title}
 					</h2>
-					<p class="text-base text-neutral-600">
-						We do not just sell tools; we deliver stability. Backed by a
-						<span class="nnpc-highlight">30-year R&amp;D heritage</span> and
-						rigorously tested on the ground in Thailand, NNPC bridges global
-						innovation with daily operations.
-					</p>
-					<p class="text-base text-neutral-600">
-						We filter out the hype to implement proven systems that reduce waste
-						and increase efficiency immediately.
-					</p>
+					<div class="space-y-4 text-base text-neutral-600">
+						<AboutContent />
+					</div>
 					<div class="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-amber-700">
 						<span class="nnpc-dot nnpc-dot-dark"></span>
-						Combining 30 Years of Global R&amp;D with 2 Years of Thai Field
-						Execution.
+						{about.accent}
 					</div>
 				</div>
 				<div class="relative" data-reveal style="--delay: 140ms;">
@@ -130,9 +109,7 @@ const industries = [
 							<span>Image Placeholder</span>
 						</div>
 					</div>
-					<div class="nnpc-caption">
-						Industrial-grade systems tailored for local execution.
-					</div>
+					<div class="nnpc-caption">{about.caption}</div>
 				</div>
 			</div>
 		</section>
@@ -140,20 +117,19 @@ const industries = [
 		<section class="nnpc-section" id="partners">
 			<div class="mx-auto max-w-6xl px-6 py-14">
 				<div class="text-center" data-reveal>
-					<p class="text-xs uppercase tracking-[0.35em] text-amber-200/70">
-						Strategic Partners
+					<p class="text-xs uppercase tracking-[0.35em] text-amber-700">
+						{partners.eyebrow}
 					</p>
-					<h2 class="font-display mt-4 text-4xl text-white">
-						Powered by industry giants.
+					<h2 class="font-display mt-4 text-4xl text-neutral-900">
+						{partners.title}
 					</h2>
-					<p class="mt-4 text-sm text-slate-300">
-						Direct integrations with world-class providers ensure enterprise-grade
-						security and performance.
+					<p class="mt-4 text-sm text-neutral-600">
+						{partners.description}
 					</p>
 				</div>
 
 				<div class="mt-8 grid gap-6 md:grid-cols-3">
-					{partners.map((partner, index) => (
+					{partners.items.map((partner, index) => (
 						<article
 							class="nnpc-panel flex h-full flex-col gap-5 rounded-2xl p-6"
 							data-reveal
@@ -165,14 +141,14 @@ const industries = [
 								</div>
 							</div>
 							<div>
-								<h3 class="text-xl font-semibold text-white">
+								<h3 class="text-xl font-semibold text-neutral-900">
 									{partner.name}
 								</h3>
-								<p class="mt-1 text-xs uppercase tracking-[0.3em] text-amber-200/80">
+								<p class="mt-1 text-xs uppercase tracking-[0.3em] text-amber-700">
 									{partner.role}
 								</p>
 							</div>
-							<p class="text-sm text-slate-300">{partner.description}</p>
+							<p class="text-sm text-neutral-600">{partner.description}</p>
 						</article>
 					))}
 				</div>
@@ -183,32 +159,32 @@ const industries = [
 			<div class="nnpc-grid" aria-hidden="true"></div>
 			<div class="mx-auto max-w-6xl px-6 py-14">
 				<div class="text-center" data-reveal>
-					<p class="text-xs uppercase tracking-[0.35em] text-amber-200/70">
-						Tailored Solutions
+					<p class="text-xs uppercase tracking-[0.35em] text-amber-700">
+						{industries.eyebrow}
 					</p>
-					<h2 class="font-display mt-4 text-4xl text-white">
-						Solutions tuned to your sector.
+					<h2 class="font-display mt-4 text-4xl text-neutral-900">
+						{industries.title}
 					</h2>
 				</div>
 
 				<div class="mt-8 grid gap-6 md:grid-cols-2">
-					{industries.map((industry, index) => (
+					{industries.items.map((industry, index) => (
 						<article
 							class="nnpc-industry-card"
 							data-reveal
 							style={`--delay: ${index * 100}ms;`}
 						>
-							<h3 class="text-xl font-semibold text-amber-200">
+							<h3 class="text-xl font-semibold text-neutral-900">
 								{industry.title}
 							</h3>
-							<div class="mt-5 space-y-4 text-sm text-slate-200">
+							<div class="mt-5 space-y-4 text-sm text-neutral-700">
 								<div>
 									<span class="nnpc-label nnpc-label-problem">The Problem</span>
-									<p class="mt-2 text-slate-300">{industry.problem}</p>
+									<p class="mt-2 text-neutral-600">{industry.problem}</p>
 								</div>
 								<div>
 									<span class="nnpc-label nnpc-label-solution">The Solution</span>
-									<p class="mt-2 text-slate-200">{industry.solution}</p>
+									<p class="mt-2 text-neutral-700">{industry.solution}</p>
 								</div>
 							</div>
 						</article>
@@ -221,11 +197,11 @@ const industries = [
 			<div class="mx-auto max-w-5xl px-6 py-14" data-reveal>
 				<div class="nnpc-panel rounded-3xl p-6 md:p-8">
 					<div class="text-center">
-						<p class="text-xs uppercase tracking-[0.35em] text-amber-200/80">
-							Get Your Profitability Diagnostic
+						<p class="text-xs uppercase tracking-[0.35em] text-amber-700">
+							{consultation.eyebrow}
 						</p>
-						<h3 class="font-display mt-4 text-3xl text-white">
-							An NNPC consultant will call you back within 48 hours.
+						<h3 class="font-display mt-4 text-3xl text-neutral-900">
+							{consultation.title}
 						</h3>
 					</div>
 
@@ -233,7 +209,7 @@ const industries = [
 						class="mt-8 grid gap-5 md:grid-cols-2"
 						action="#"
 						method="POST"
-						onsubmit="event.preventDefault(); alert('Thank you. Your request has been simulated.');"
+						onsubmit="alert('Thank you. Your request has been simulated.'); return false;"
 					>
 						<div>
 							<label class="nnpc-field-label" for="name">Full Name</label>
@@ -336,12 +312,11 @@ const industries = [
 						loading="lazy"
 					/>
 				</a>
-				<p class="mt-4 text-sm text-slate-400">
-					NNPC AI is a proud subsidiary of Chin Chun Enterprise 2002.
-				</p>
-				<p class="mt-4 text-xs uppercase tracking-[0.3em] text-slate-600">
-					&copy; NNPC AI. All Rights Reserved.
-				</p>
+				<p class="mt-4 text-sm text-neutral-600">{footer.blurb}</p>
+				<p
+					class="mt-4 text-xs uppercase tracking-[0.3em] text-neutral-500"
+					set:html={footer.legal}
+				></p>
 			</div>
 		</footer>
 	</div>
@@ -351,20 +326,25 @@ const industries = [
 	.nnpc-page {
 		--gold: #f1c84b;
 		--gold-dim: #c9a640;
-		--ink: #0a0a0a;
-		--ink-deep: #050505;
-		--surface: #151515;
-		--ivory: #f7f3ea;
-		--stone: #b7b2a8;
-		background: radial-gradient(circle at 25% -10%, #26221a 0%, #0b0b0b 45%, #050505 100%);
-		color: #f3ede2;
+		--ink: #141414;
+		--ink-deep: #0a0a0a;
+		--surface: #ffffff;
+		--ivory: #fbf8f1;
+		--stone: #d3cbbd;
+		background: radial-gradient(
+			circle at 20% -15%,
+			#fff4d2 0%,
+			#f8f3ea 38%,
+			#f1ede4 100%
+		);
+		color: #141414;
 	}
 
 	.nnpc-hero {
 		position: relative;
 		display: flex;
 		min-height: 100vh;
-		background-color: #050505;
+		background-color: #f6f2e9;
 		isolation: isolate;
 	}
 
@@ -375,18 +355,18 @@ const industries = [
 		height: 100%;
 		object-fit: cover;
 		object-position: center 35%;
-		opacity: 0.25;
+		opacity: 1;
 		z-index: 0;
 	}
 
 	.nnpc-hero-overlay {
 		position: absolute;
 		inset: 0;
-		background: radial-gradient(
-			circle at 50% 45%,
-			rgba(6, 6, 6, 0.18) 0%,
-			rgba(6, 6, 6, 0.55) 65%,
-			rgba(6, 6, 6, 0.85) 100%
+		background: linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.82) 0%,
+			rgba(255, 255, 255, 0.55) 45%,
+			rgba(247, 242, 232, 0.78) 100%
 		);
 		z-index: 1;
 	}
@@ -401,29 +381,30 @@ const industries = [
 	}
 
 	.nnpc-section-light {
-		background: linear-gradient(135deg, #f9f5ee 0%, #f0ece3 100%);
-		color: #1a1a1a;
+		background: linear-gradient(135deg, #ffffff 0%, #f5f1e8 100%);
+		color: #141414;
 	}
 
 	.nnpc-section-dark {
-		background: #0b0b0b;
+		background: linear-gradient(135deg, #fbf7ee 0%, #f2ede2 100%);
+		color: #141414;
 	}
 
 	.nnpc-grid {
 		position: absolute;
 		inset: 0;
 		background-image:
-			linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-			linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+			linear-gradient(rgba(10, 10, 10, 0.05) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(10, 10, 10, 0.05) 1px, transparent 1px);
 		background-size: 40px 40px;
-		opacity: 0.3;
+		opacity: 0.25;
 		pointer-events: none;
 	}
 
 	.nnpc-panel {
-		background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(8, 10, 14, 0.45));
-		border: 1px solid rgba(255, 255, 255, 0.12);
-		box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+		background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(244, 239, 228, 0.85));
+		border: 1px solid rgba(14, 14, 14, 0.08);
+		box-shadow: 0 20px 45px rgba(24, 18, 5, 0.12);
 	}
 
 	.nnpc-hero-main {
@@ -433,7 +414,7 @@ const industries = [
 	.nnpc-hero-main h1 {
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
-		text-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+		text-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 	}
 
 	.nnpc-btn {
@@ -461,18 +442,18 @@ const industries = [
 	}
 
 	.nnpc-btn-outline {
-		border: 1px solid rgba(255, 255, 255, 0.35);
-		color: #f9f6ef;
-		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(15, 12, 6, 0.25);
+		color: #1f1608;
+		background: rgba(255, 255, 255, 0.7);
 	}
 
 	.nnpc-btn-outline:hover {
 		transform: translateY(-2px);
-		background: rgba(255, 255, 255, 0.12);
+		background: rgba(241, 200, 75, 0.12);
 	}
 
 	.nnpc-link {
-		color: rgba(226, 232, 240, 0.8);
+		color: rgba(30, 26, 18, 0.7);
 		transition: color 0.2s ease;
 	}
 
@@ -503,10 +484,10 @@ const industries = [
 		position: relative;
 		overflow: hidden;
 		border-radius: 1.5rem;
-		box-shadow: 0 25px 45px rgba(0, 0, 0, 0.25);
+		box-shadow: 0 20px 40px rgba(22, 16, 8, 0.15);
 		transform: rotate(-1.5deg);
 		transition: transform 0.4s ease;
-		background: #111;
+		background: #fffaf0;
 		min-height: 320px;
 		display: grid;
 		place-items: center;
@@ -533,8 +514,8 @@ const industries = [
 		place-items: center;
 		width: 100%;
 		height: 100%;
-		background: linear-gradient(135deg, rgba(241, 200, 75, 0.18), rgba(5, 5, 5, 0.2));
-		color: rgba(255, 255, 255, 0.7);
+		background: linear-gradient(135deg, rgba(241, 200, 75, 0.22), rgba(255, 255, 255, 0.9));
+		color: rgba(22, 18, 10, 0.7);
 		font-size: 0.75rem;
 		letter-spacing: 0.35em;
 		text-transform: uppercase;
@@ -545,14 +526,14 @@ const industries = [
 		font-size: 0.7rem;
 		letter-spacing: 0.2em;
 		text-transform: uppercase;
-		color: #b08d2e;
+		color: #9c7c1f;
 	}
 
 	.nnpc-partner-image {
 		border-radius: 1rem;
-		border: 1px solid rgba(255, 255, 255, 0.08);
+		border: 1px solid rgba(12, 10, 6, 0.08);
 		padding: 0.75rem;
-		background: rgba(255, 255, 255, 0.04);
+		background: rgba(255, 255, 255, 0.7);
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -571,22 +552,23 @@ const industries = [
 		width: 100%;
 		height: 100%;
 		border-radius: 0.85rem;
-		border: 1px dashed rgba(255, 255, 255, 0.15);
+		border: 1px dashed rgba(14, 12, 8, 0.2);
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		color: rgba(241, 200, 75, 0.7);
+		color: rgba(152, 120, 20, 0.7);
 		font-size: 0.7rem;
 		letter-spacing: 0.3em;
 		text-transform: uppercase;
 	}
 
 	.nnpc-industry-card {
-		background: rgba(255, 255, 255, 0.03);
-		border: 1px solid rgba(255, 255, 255, 0.08);
+		background: rgba(255, 255, 255, 0.82);
+		border: 1px solid rgba(18, 14, 8, 0.08);
 		border-radius: 1.5rem;
 		padding: 2rem;
-		backdrop-filter: blur(12px);
+		backdrop-filter: blur(8px);
+		box-shadow: 0 15px 30px rgba(20, 16, 10, 0.08);
 		transition: transform 0.3s ease, border-color 0.3s ease;
 	}
 
@@ -606,7 +588,7 @@ const industries = [
 	}
 
 	.nnpc-label-problem {
-		color: rgba(255, 255, 255, 0.55);
+		color: rgba(30, 24, 16, 0.55);
 	}
 
 	.nnpc-label-solution {
@@ -618,17 +600,17 @@ const industries = [
 		font-size: 0.7rem;
 		letter-spacing: 0.2em;
 		text-transform: uppercase;
-		color: rgba(226, 232, 240, 0.7);
+		color: rgba(30, 24, 16, 0.7);
 		margin-bottom: 0.5rem;
 	}
 
 	.nnpc-field {
 		width: 100%;
 		border-radius: 0.9rem;
-		border: 1px solid rgba(255, 255, 255, 0.1);
-		background: rgba(5, 5, 5, 0.7);
+		border: 1px solid rgba(18, 14, 8, 0.12);
+		background: rgba(255, 255, 255, 0.95);
 		padding: 0.9rem 1rem;
-		color: #f4f0e7;
+		color: #16120a;
 		font-size: 0.95rem;
 		transition: border-color 0.3s ease, box-shadow 0.3s ease;
 	}
@@ -651,8 +633,8 @@ const industries = [
 	}
 
 	.nnpc-footer {
-		background: #050505;
-		border-top: 1px solid rgba(255, 255, 255, 0.08);
+		background: #f7f2e8;
+		border-top: 1px solid rgba(18, 14, 8, 0.08);
 	}
 
 	[data-reveal] {
