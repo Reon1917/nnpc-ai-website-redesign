@@ -62,7 +62,7 @@ const footer = footerEntry.data;
 			<div class="nnpc-hero-overlay" aria-hidden="true"></div>
 			<div class="nnpc-hero-inner relative z-10 mx-auto flex w-full max-w-6xl items-center justify-center px-6 py-12">
 				<div class="nnpc-hero-main space-y-5 text-center" data-reveal>
-					<p class="text-xs uppercase tracking-[0.4em] text-amber-700">
+					<p class="text-xs uppercase tracking-[0.4em] text-amber-800">
 						{hero.eyebrow}
 					</p>
 					<h1 class="font-display text-5xl leading-tight text-neutral-900 md:text-6xl">
@@ -89,7 +89,7 @@ const footer = footerEntry.data;
 		<section class="nnpc-section nnpc-section-light" id="about">
 			<div class="mx-auto grid max-w-6xl gap-8 px-6 py-14 lg:grid-cols-[1.05fr_0.95fr]">
 				<div class="space-y-4" data-reveal>
-					<p class="text-xs uppercase tracking-[0.35em] text-neutral-500">
+					<p class="text-xs uppercase tracking-[0.35em] text-neutral-600">
 						{about.eyebrow}
 					</p>
 					<h2 class="font-display text-4xl text-neutral-900">
@@ -98,7 +98,7 @@ const footer = footerEntry.data;
 					<div class="space-y-4 text-base text-neutral-600">
 						<AboutContent />
 					</div>
-					<div class="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-amber-700">
+					<div class="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-amber-800">
 						<span class="nnpc-dot nnpc-dot-dark"></span>
 						{about.accent}
 					</div>
@@ -117,7 +117,7 @@ const footer = footerEntry.data;
 		<section class="nnpc-section" id="partners">
 			<div class="mx-auto max-w-6xl px-6 py-14">
 				<div class="text-center" data-reveal>
-					<p class="text-xs uppercase tracking-[0.35em] text-amber-700">
+					<p class="text-xs uppercase tracking-[0.35em] text-amber-800">
 						{partners.eyebrow}
 					</p>
 					<h2 class="font-display mt-4 text-4xl text-neutral-900">
@@ -144,7 +144,7 @@ const footer = footerEntry.data;
 								<h3 class="text-xl font-semibold text-neutral-900">
 									{partner.name}
 								</h3>
-								<p class="mt-1 text-xs uppercase tracking-[0.3em] text-amber-700">
+								<p class="mt-1 text-xs uppercase tracking-[0.3em] text-amber-800">
 									{partner.role}
 								</p>
 							</div>
@@ -159,7 +159,7 @@ const footer = footerEntry.data;
 			<div class="nnpc-grid" aria-hidden="true"></div>
 			<div class="mx-auto max-w-6xl px-6 py-14">
 				<div class="text-center" data-reveal>
-					<p class="text-xs uppercase tracking-[0.35em] text-amber-700">
+					<p class="text-xs uppercase tracking-[0.35em] text-amber-800">
 						{industries.eyebrow}
 					</p>
 					<h2 class="font-display mt-4 text-4xl text-neutral-900">
@@ -197,7 +197,7 @@ const footer = footerEntry.data;
 			<div class="mx-auto max-w-5xl px-6 py-14" data-reveal>
 				<div class="nnpc-panel rounded-3xl p-6 md:p-8">
 					<div class="text-center">
-						<p class="text-xs uppercase tracking-[0.35em] text-amber-700">
+						<p class="text-xs uppercase tracking-[0.35em] text-amber-800">
 							{consultation.eyebrow}
 						</p>
 						<h3 class="font-display mt-4 text-3xl text-neutral-900">
@@ -314,7 +314,7 @@ const footer = footerEntry.data;
 				</a>
 				<p class="mt-4 text-sm text-neutral-600">{footer.blurb}</p>
 				<p
-					class="mt-4 text-xs uppercase tracking-[0.3em] text-neutral-500"
+					class="mt-4 text-xs uppercase tracking-[0.3em] text-neutral-600"
 					set:html={footer.legal}
 				></p>
 			</div>
@@ -326,6 +326,7 @@ const footer = footerEntry.data;
 	.nnpc-page {
 		--gold: #f1c84b;
 		--gold-dim: #c9a640;
+		--gold-ink: #7a5a08;
 		--ink: #141414;
 		--ink-deep: #0a0a0a;
 		--surface: #ffffff;
@@ -526,7 +527,7 @@ const footer = footerEntry.data;
 		font-size: 0.7rem;
 		letter-spacing: 0.2em;
 		text-transform: uppercase;
-		color: #9c7c1f;
+		color: var(--gold-ink);
 	}
 
 	.nnpc-partner-image {
@@ -556,7 +557,7 @@ const footer = footerEntry.data;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		color: rgba(152, 120, 20, 0.7);
+		color: var(--gold-ink);
 		font-size: 0.7rem;
 		letter-spacing: 0.3em;
 		text-transform: uppercase;
@@ -588,11 +589,11 @@ const footer = footerEntry.data;
 	}
 
 	.nnpc-label-problem {
-		color: rgba(30, 24, 16, 0.55);
+		color: #5a4a2a;
 	}
 
 	.nnpc-label-solution {
-		color: var(--gold);
+		color: var(--gold-ink);
 	}
 
 	.nnpc-field-label {
