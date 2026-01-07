@@ -1,0 +1,232 @@
+---
+const { title, members } = Astro.props;
+---
+
+<section class="about-section about-team">
+	<div class="mx-auto max-w-6xl px-6 pb-24 pt-10">
+		<div class="about-fade mb-10" style="--delay: 120ms;">
+			<h2 class="font-display text-3xl text-neutral-900 md:text-4xl">
+				{title}
+			</h2>
+		</div>
+		<div class="team-grid">
+			{members.map((member, index) => (
+				<article class="team-card" style={`--delay: ${200 + index * 120}ms;`}>
+					<div class="team-cutout">
+						<div class="team-silhouette" aria-hidden="true"></div>
+						<span class="team-placeholder-label">Profile Cutout</span>
+					</div>
+					<div class="team-meta">
+						<h3>{member.name}</h3>
+						<p>{member.role}</p>
+					</div>
+				</article>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.team-grid {
+		display: grid;
+		gap: 1.75rem;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	}
+
+	.team-card {
+		position: relative;
+		padding: 1.5rem;
+		border-radius: 1.75rem;
+		background: linear-gradient(
+			160deg,
+			rgba(255, 255, 255, 0.97),
+			rgba(243, 237, 224, 0.9)
+		);
+		border: 1px solid rgba(14, 14, 14, 0.08);
+		box-shadow: 0 18px 40px rgba(24, 18, 5, 0.12);
+		overflow: hidden;
+		transition: transform 0.45s ease, box-shadow 0.45s ease;
+		animation: team-rise 0.8s ease-out both;
+		animation-delay: var(--delay, 0ms);
+	}
+
+	.team-card::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		padding: 1px;
+		border-radius: inherit;
+		background: conic-gradient(
+			from 120deg,
+			rgba(241, 200, 75, 0.7),
+			rgba(255, 255, 255, 0.3),
+			rgba(241, 200, 75, 0.45),
+			rgba(255, 255, 255, 0.2),
+			rgba(241, 200, 75, 0.7)
+		);
+		-webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+		-webkit-mask-composite: xor;
+		mask-composite: exclude;
+		opacity: 0.55;
+		transition: opacity 0.4s ease, transform 0.6s ease;
+	}
+
+	.team-card::after {
+		content: "";
+		position: absolute;
+		inset: -40% -30% 45% -30%;
+		background: radial-gradient(
+			circle at 50% 0%,
+			rgba(241, 200, 75, 0.35),
+			transparent 65%
+		);
+		opacity: 0.6;
+		transition: opacity 0.4s ease, transform 0.6s ease;
+	}
+
+	.team-card:hover {
+		transform: translateY(-8px);
+		box-shadow: 0 28px 50px rgba(24, 18, 5, 0.18);
+	}
+
+	.team-card:hover::before {
+		opacity: 0.9;
+		transform: rotate(8deg);
+	}
+
+	.team-card:hover::after {
+		opacity: 0.9;
+		transform: translateY(-6%);
+	}
+
+	.team-cutout {
+		position: relative;
+		height: 220px;
+		border-radius: 1.4rem;
+		background: linear-gradient(
+			145deg,
+			rgba(241, 200, 75, 0.25),
+			rgba(255, 255, 255, 0.92)
+		);
+		overflow: hidden;
+		display: grid;
+		place-items: center;
+	}
+
+	.team-cutout::before {
+		content: "";
+		position: absolute;
+		inset: -120% -30%;
+		background: linear-gradient(
+			120deg,
+			transparent 40%,
+			rgba(255, 255, 255, 0.85) 50%,
+			transparent 60%
+		);
+		animation: cutout-shine 6s ease-in-out infinite;
+		opacity: 0.7;
+	}
+
+	.team-silhouette {
+		position: relative;
+		width: 150px;
+		height: 180px;
+		z-index: 1;
+	}
+
+	.team-silhouette::before {
+		content: "";
+		position: absolute;
+		top: 6px;
+		left: 50%;
+		width: 84px;
+		height: 84px;
+		transform: translateX(-50%);
+		border-radius: 50%;
+		background: radial-gradient(
+			circle at 30% 25%,
+			rgba(255, 255, 255, 0.9),
+			rgba(229, 208, 156, 0.7)
+		);
+		box-shadow: 0 12px 25px rgba(97, 72, 12, 0.2);
+	}
+
+	.team-silhouette::after {
+		content: "";
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		width: 170px;
+		height: 110px;
+		transform: translateX(-50%);
+		border-radius: 50% 50% 40% 40%;
+		background: linear-gradient(
+			180deg,
+			rgba(241, 200, 75, 0.55),
+			rgba(222, 200, 150, 0.25)
+		);
+		box-shadow: inset 0 20px 30px rgba(255, 255, 255, 0.3);
+	}
+
+	.team-placeholder-label {
+		position: absolute;
+		bottom: 1rem;
+		z-index: 1;
+		font-size: 0.65rem;
+		text-transform: uppercase;
+		letter-spacing: 0.26em;
+		color: rgba(26, 20, 10, 0.6);
+	}
+
+	.team-meta {
+		margin-top: 1.25rem;
+	}
+
+	.team-meta h3 {
+		font-family: var(--font-display);
+		font-size: 1.2rem;
+		color: #1a1a1a;
+	}
+
+	.team-meta p {
+		margin-top: 0.25rem;
+		font-size: 0.8rem;
+		letter-spacing: 0.22em;
+		text-transform: uppercase;
+		color: #7a5a08;
+	}
+
+	@keyframes team-rise {
+		0% {
+			opacity: 0;
+			transform: translateY(18px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes cutout-shine {
+		0% {
+			transform: translateX(-60%);
+		}
+		50% {
+			transform: translateX(30%);
+		}
+		100% {
+			transform: translateX(60%);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.team-card,
+		.team-cutout::before {
+			animation: none;
+		}
+
+		.team-card {
+			transform: none;
+		}
+	}
+</style>

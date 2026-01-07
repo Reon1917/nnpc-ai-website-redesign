@@ -1,0 +1,122 @@
+---
+const links = [
+	{ href: "/", label: "Home" },
+	{ href: "/about", label: "About" },
+];
+
+const pathname = Astro.url.pathname;
+const normalizedPath =
+	pathname.length > 1 && pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
+---
+
+<nav class="nnpc-nav" aria-label="Primary">
+	<div class="nnpc-nav-inner mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+		<a class="nnpc-nav-logo" href="/">NNPC AI</a>
+		<div class="nnpc-nav-links">
+			{links.map((link) => {
+				const isActive = normalizedPath === link.href;
+				return (
+					<a
+						class={`nnpc-nav-link ${isActive ? "is-active" : ""}`}
+						href={link.href}
+						aria-current={isActive ? "page" : undefined}
+					>
+						{link.label}
+					</a>
+				);
+			})}
+		</div>
+	</div>
+</nav>
+
+<style>
+	.nnpc-nav {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 50;
+		background: linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.92) 0%,
+			rgba(255, 255, 255, 0.72) 70%,
+			rgba(255, 255, 255, 0.4) 100%
+		);
+		border-bottom: 1px solid rgba(14, 14, 14, 0.08);
+		box-shadow: 0 12px 30px rgba(18, 12, 4, 0.12);
+		backdrop-filter: blur(12px);
+	}
+
+	.nnpc-nav::after {
+		content: "";
+		position: absolute;
+		left: 8%;
+		right: 8%;
+		bottom: 0;
+		height: 1px;
+		background: linear-gradient(
+			90deg,
+			transparent,
+			rgba(241, 200, 75, 0.75),
+			transparent
+		);
+		opacity: 0.7;
+	}
+
+	.nnpc-nav-logo {
+		font-family: var(--font-display);
+		font-size: 1.2rem;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: #1a1a1a;
+	}
+
+	.nnpc-nav-links {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+	}
+
+	.nnpc-nav-link {
+		font-size: 0.78rem;
+		letter-spacing: 0.26em;
+		text-transform: uppercase;
+		font-weight: 600;
+		color: rgba(30, 24, 16, 0.7);
+		transition: color 0.3s ease, transform 0.3s ease;
+	}
+
+	.nnpc-nav-link:hover {
+		color: #7a5a08;
+		transform: translateY(-1px);
+	}
+
+	.nnpc-nav-link.is-active {
+		color: #1a1a1a;
+	}
+
+	.nnpc-nav-link.is-active::after {
+		content: "";
+		display: block;
+		margin-top: 0.4rem;
+		height: 2px;
+		width: 100%;
+		background: linear-gradient(
+			90deg,
+			rgba(241, 200, 75, 0.9),
+			rgba(241, 200, 75, 0.2)
+		);
+	}
+
+	@media (max-width: 768px) {
+		.nnpc-nav-inner {
+			flex-direction: column;
+			gap: 0.75rem;
+			padding-bottom: 1rem;
+		}
+
+		.nnpc-nav-links {
+			gap: 1.25rem;
+		}
+	}
+</style>

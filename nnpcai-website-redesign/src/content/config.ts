@@ -69,4 +69,11 @@ const home = defineCollection({
 	]),
 });
 
-export const collections = { home };
+const about = defineCollection({
+	type: "content",
+	schema: z.object({
+		title: z.string(),
+	}),
+});
+
+export const collections = { home, about };

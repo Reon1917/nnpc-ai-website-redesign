@@ -1,0 +1,67 @@
+---
+import Layout from "@/layouts/main.astro";
+import NavBar from "@/components/site/NavBar.astro";
+import Origin from "@/components/aboutPage/Origin.astro";
+import CoreTeam from "@/components/aboutPage/CoreTeam.astro";
+import { Content as OriginContent, frontmatter as origin } from "../content/about/origin.md";
+
+const team = [
+	{ name: "Derek Yeh", role: "Chief Executive Officer" },
+	{ name: "Kyo Lee", role: "Chief Technology Officer" },
+	{ name: "Rey Huang", role: "Chief Operating Officer" },
+	{ name: "Geo Chyu", role: "Cloud Solution Director" },
+];
+---
+
+<Layout title="About | NNPC AI">
+	<NavBar />
+	<main class="about-page">
+		<Origin title={origin.title}>
+			<OriginContent />
+		</Origin>
+		<CoreTeam title="The Core Team" members={team} />
+	</main>
+</Layout>
+
+<style is:global>
+	.about-page {
+		background: radial-gradient(
+			circle at 20% -15%,
+			#fff4d2 0%,
+			#f8f3ea 38%,
+			#f1ede4 100%
+		);
+		color: #141414;
+		min-height: 100vh;
+	}
+
+	.about-section {
+		position: relative;
+	}
+
+	.about-fade {
+		opacity: 0;
+		transform: translateY(18px);
+		animation: about-fade-up 0.85s ease-out forwards;
+		animation-delay: var(--delay, 0ms);
+	}
+
+	@keyframes about-fade-up {
+		0% {
+			opacity: 0;
+			transform: translateY(18px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.about-fade {
+			animation: none;
+			opacity: 1;
+			transform: none;
+		}
+	}
+</style>
