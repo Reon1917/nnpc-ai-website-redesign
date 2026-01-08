@@ -1,0 +1,486 @@
+---
+import Layout from "@/layouts/main.astro";
+import NavBar from "@/components/site/NavBar.astro";
+---
+
+<Layout title="AI Server | NNPC AI">
+	<NavBar />
+	<main class="ai-server-page">
+		<section class="ai-hero">
+			<div class="ai-hero-inner">
+				<div class="ai-hero-copy ai-fade-up">
+					<p class="ai-eyebrow">NNPC AI Workstation</p>
+					<h1>Workstation-grade desktops built to run local LLMs.</h1>
+					<p class="ai-lead">
+						We install a ready-to-use private AI stack so teams can chat, search,
+						and generate visuals without relying on cloud services or technical setup.
+					</p>
+					<div class="ai-cta-row">
+						<a class="ai-cta" href="/#consultation">Try the AI Server</a>
+						<span class="ai-cta-note">On-prem evaluation with your team and data.</span>
+					</div>
+					<div class="ai-hero-metrics">
+						<div class="ai-metric">
+							<h3>Private by Default</h3>
+							<p>Your data stays inside your business—no cloud uploads or sharing.</p>
+						</div>
+						<div class="ai-metric">
+							<h3>Ready Day One</h3>
+							<p>Software stack pre-installed, updated, and verified for you.</p>
+						</div>
+						<div class="ai-metric">
+							<h3>Non-Technical Teams</h3>
+							<p>Simple interfaces built for business users and operators.</p>
+						</div>
+					</div>
+				</div>
+				<div class="ai-hero-media ai-fade-up" style="--delay: 120ms;">
+					<div class="ai-image-stack">
+						<div class="ai-image-placeholder">
+							Image placeholder: Workstation chassis
+						</div>
+						<div class="ai-image-placeholder small">
+							Image placeholder: Local LLM dashboard
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="ai-section ai-local">
+			<div class="ai-section-inner">
+				<div class="ai-local-copy ai-fade-up" style="--delay: 80ms;">
+					<p class="ai-eyebrow">Local LLM Advantage</p>
+					<h2>Private AI your team can use immediately.</h2>
+					<p>
+						Local LLMs run directly on your AI workstation. That means business teams
+						can ask questions, summarize documents, and build knowledge bases without
+						sending sensitive files outside the company.
+					</p>
+					<ul class="ai-list">
+						<li>Keep contracts, SOPs, and reports fully private.</li>
+						<li>Faster answers since everything runs locally.</li>
+						<li>Confidence for leadership: no data leaves the building.</li>
+					</ul>
+				</div>
+				<div class="ai-local-media ai-fade-up" style="--delay: 140ms;">
+					<div class="ai-image-placeholder tall">
+						Image placeholder: Local LLM workflow diagram
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="ai-section ai-specs">
+			<div class="ai-section-header ai-fade-up">
+				<p class="ai-eyebrow">Pre-Installed Software</p>
+				<h2>The private AI stack we install for you.</h2>
+				<p>
+					We deliver a fully configured workstation with the tools your team needs
+					to chat, search documents, and generate visuals on day one.
+				</p>
+			</div>
+			<div class="ai-spec-grid">
+				<article class="ai-spec-card ai-fade-up" style="--delay: 80ms;">
+					<h3>Open WebUI</h3>
+					<p>
+						Chat interface with top OSS models plus RAG for document knowledge bases.
+					</p>
+				</article>
+				<article class="ai-spec-card ai-fade-up" style="--delay: 160ms;">
+					<h3>ComfyUI</h3>
+					<p>Industry standard workflows for image and video generation.</p>
+				</article>
+				<article class="ai-spec-card ai-fade-up" style="--delay: 240ms;">
+					<h3>Gigabyte AI Top</h3>
+					<p>
+						State-of-the-art software to install OSS text, image, and video models easily.
+					</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="ai-section ai-deploy">
+			<div class="ai-section-inner">
+				<div class="ai-deploy-media ai-fade-up" style="--delay: 100ms;">
+					<div class="ai-image-placeholder wide">
+						Image placeholder: AI server deployment scene
+					</div>
+				</div>
+				<div class="ai-deploy-copy ai-fade-up" style="--delay: 180ms;">
+					<p class="ai-eyebrow">Deployment Support</p>
+					<h2>Designed for real operations.</h2>
+					<p>
+						NNPC AI delivers workstation builds with validated drivers, private AI
+						software, and guided onboarding. From first boot to production, we align
+						the server with your team and business workflows.
+					</p>
+					<div class="ai-chip-row">
+						<span>Private AI onboarding</span>
+						<span>Business workflows</span>
+						<span>Document knowledge bases</span>
+						<span>Model updates</span>
+						<span>Ongoing support</span>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.ai-server-page {
+		--gold: #f2c14e;
+		--gold-deep: #a4721d;
+		--ink: #18130a;
+		--ink-soft: rgba(24, 19, 10, 0.7);
+		--cream: #f6f1e6;
+		--sand: #e6dcc8;
+		--stone: #c9bba3;
+		background:
+			radial-gradient(circle at 12% 0%, rgba(242, 193, 78, 0.35), transparent 45%),
+			radial-gradient(circle at 85% 15%, rgba(181, 133, 54, 0.25), transparent 50%),
+			linear-gradient(135deg, #fffaf0 0%, #f2eadb 55%, #ece2cf 100%);
+		color: var(--ink);
+		min-height: 100vh;
+		padding-top: 6.5rem;
+	}
+
+	.ai-hero {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.ai-hero::before,
+	.ai-hero::after {
+		content: "";
+		position: absolute;
+		border-radius: 999px;
+		filter: blur(0);
+		opacity: 0.55;
+		z-index: 0;
+	}
+
+	.ai-hero::before {
+		width: 320px;
+		height: 320px;
+		background: radial-gradient(circle, rgba(242, 193, 78, 0.6), transparent 70%);
+		top: -120px;
+		left: -120px;
+	}
+
+	.ai-hero::after {
+		width: 380px;
+		height: 380px;
+		background: radial-gradient(circle, rgba(93, 59, 14, 0.35), transparent 70%);
+		bottom: -160px;
+		right: -120px;
+	}
+
+	.ai-hero-inner,
+	.ai-section-inner {
+		position: relative;
+		z-index: 1;
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 4.5rem 1.5rem;
+		display: grid;
+		gap: 3rem;
+		align-items: center;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	}
+
+	.ai-hero-copy h1 {
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 2.2rem + 2vw, 4rem);
+		line-height: 1.05;
+		letter-spacing: 0.04em;
+		margin-bottom: 1.5rem;
+	}
+
+	.ai-eyebrow {
+		font-size: 0.72rem;
+		letter-spacing: 0.4em;
+		text-transform: uppercase;
+		font-weight: 600;
+		color: var(--gold-deep);
+		margin-bottom: 1rem;
+	}
+
+	.ai-lead {
+		font-size: 1.1rem;
+		line-height: 1.7;
+		color: var(--ink-soft);
+		margin-bottom: 2rem;
+	}
+
+	.ai-cta-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 1rem;
+		margin-bottom: 2.5rem;
+	}
+
+	.ai-cta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.9rem 2.1rem;
+		border-radius: 999px;
+		background: linear-gradient(135deg, #f6d07a 0%, #f0b642 100%);
+		color: #1a1205;
+		font-weight: 700;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		font-size: 0.78rem;
+		box-shadow: 0 18px 30px rgba(148, 102, 19, 0.2);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.ai-cta:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 26px 40px rgba(148, 102, 19, 0.28);
+	}
+
+	.ai-cta-note {
+		font-size: 0.95rem;
+		color: rgba(24, 19, 10, 0.6);
+	}
+
+	.ai-hero-metrics {
+		display: grid;
+		gap: 1.5rem;
+		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	}
+
+	.ai-metric {
+		padding: 1.3rem 1.4rem;
+		border-radius: 1.2rem;
+		background: rgba(255, 255, 255, 0.75);
+		border: 1px solid rgba(24, 19, 10, 0.08);
+		box-shadow: 0 20px 35px rgba(24, 19, 10, 0.08);
+	}
+
+	.ai-metric h3 {
+		font-size: 0.95rem;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		font-weight: 700;
+		margin-bottom: 0.6rem;
+	}
+
+	.ai-metric p {
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: var(--ink-soft);
+	}
+
+	.ai-image-stack {
+		display: grid;
+		gap: 1.5rem;
+	}
+
+	.ai-image-placeholder {
+		border-radius: 1.5rem;
+		border: 1px dashed rgba(24, 19, 10, 0.25);
+		background:
+			repeating-linear-gradient(
+				135deg,
+				rgba(255, 255, 255, 0.5),
+				rgba(255, 255, 255, 0.5) 16px,
+				rgba(255, 255, 255, 0.2) 16px,
+				rgba(255, 255, 255, 0.2) 32px
+			),
+			linear-gradient(135deg, rgba(246, 240, 229, 0.9), rgba(229, 218, 199, 0.9));
+		color: rgba(60, 45, 20, 0.7);
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.28em;
+		text-transform: uppercase;
+		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 1.5rem;
+		min-height: 16rem;
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+	}
+
+	.ai-image-placeholder.small {
+		min-height: 11rem;
+	}
+
+	.ai-image-placeholder.tall {
+		min-height: 21rem;
+	}
+
+	.ai-image-placeholder.wide {
+		min-height: 16rem;
+	}
+
+	.ai-section {
+		position: relative;
+	}
+
+	.ai-local {
+		background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(245, 238, 224, 0.9));
+		border-top: 1px solid rgba(24, 19, 10, 0.08);
+		border-bottom: 1px solid rgba(24, 19, 10, 0.08);
+	}
+
+	.ai-local p {
+		color: var(--ink-soft);
+		line-height: 1.7;
+		margin-bottom: 1.6rem;
+	}
+
+	.ai-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		gap: 0.9rem;
+	}
+
+	.ai-list li {
+		position: relative;
+		padding-left: 1.8rem;
+		font-size: 1rem;
+		color: rgba(24, 19, 10, 0.72);
+	}
+
+	.ai-list li::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0.5rem;
+		width: 0.6rem;
+		height: 0.6rem;
+		border-radius: 999px;
+		background: radial-gradient(circle, #f2c14e 0%, #a4721d 100%);
+		box-shadow: 0 0 12px rgba(242, 193, 78, 0.6);
+	}
+
+	.ai-section-header {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 4.5rem 1.5rem 2rem;
+		text-align: center;
+	}
+
+	.ai-section-header h2,
+	.ai-local h2,
+	.ai-deploy-copy h2 {
+		font-family: var(--font-display);
+		font-size: clamp(2rem, 1.6rem + 1.6vw, 3rem);
+		margin-bottom: 1rem;
+	}
+
+	.ai-section-header p {
+		color: var(--ink-soft);
+		font-size: 1.05rem;
+	}
+
+	.ai-spec-grid {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 0 1.5rem 4.5rem;
+		display: grid;
+		gap: 1.5rem;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	}
+
+	.ai-spec-card {
+		background: #fffdf7;
+		border-radius: 1.4rem;
+		padding: 1.7rem;
+		border: 1px solid rgba(24, 19, 10, 0.08);
+		box-shadow: 0 25px 45px rgba(24, 19, 10, 0.08);
+	}
+
+	.ai-spec-card h3 {
+		font-size: 0.92rem;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		margin-bottom: 0.8rem;
+	}
+
+	.ai-spec-card p {
+		color: var(--ink-soft);
+		line-height: 1.6;
+	}
+
+	.ai-deploy {
+		background: linear-gradient(135deg, rgba(250, 246, 238, 0.9), rgba(232, 222, 206, 0.9));
+		border-top: 1px solid rgba(24, 19, 10, 0.08);
+	}
+
+	.ai-deploy-copy p {
+		color: var(--ink-soft);
+		line-height: 1.7;
+		margin-bottom: 1.5rem;
+	}
+
+	.ai-chip-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.8rem;
+	}
+
+	.ai-chip-row span {
+		padding: 0.6rem 1.2rem;
+		border-radius: 999px;
+		border: 1px solid rgba(24, 19, 10, 0.16);
+		background: rgba(255, 255, 255, 0.7);
+		font-size: 0.75rem;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		font-weight: 600;
+		color: rgba(24, 19, 10, 0.7);
+	}
+
+	.ai-fade-up {
+		opacity: 0;
+		transform: translateY(16px);
+		animation: ai-fade-up 0.9s ease-out forwards;
+		animation-delay: var(--delay, 0ms);
+	}
+
+	@keyframes ai-fade-up {
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (max-width: 900px) {
+		.ai-hero-inner,
+		.ai-section-inner {
+			padding: 3.5rem 1.5rem;
+		}
+
+		.ai-cta-note {
+			flex-basis: 100%;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.ai-cta-row {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.ai-hero-metrics {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.ai-fade-up {
+			animation: none;
+			opacity: 1;
+			transform: none;
+		}
+	}
+</style>
