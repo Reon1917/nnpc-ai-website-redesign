@@ -1,5 +1,13 @@
 ---
-const { title, members } = Astro.props;
+type TeamMember = {
+	name: string;
+	role: string;
+};
+
+const { title, members } = Astro.props as {
+	title: string;
+	members: TeamMember[];
+};
 ---
 
 <section class="about-section about-team">
@@ -10,7 +18,7 @@ const { title, members } = Astro.props;
 			</h2>
 		</div>
 		<div class="team-grid">
-			{members.map((member, index) => (
+			{members.map((member: TeamMember, index: number) => (
 				<article class="team-card" style={`--delay: ${200 + index * 120}ms;`}>
 					<div class="team-cutout">
 						<div class="team-silhouette" aria-hidden="true"></div>
