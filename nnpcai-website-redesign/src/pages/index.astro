@@ -10,6 +10,7 @@ import Partners from "../components/homePage/partners";
 import Industries from "../components/homePage/industries";
 import Consultation from "../components/homePage/consultation.astro";
 import Footer from "../components/homePage/footer";
+import NavBar from "@/components/site/NavBar.astro";
 
 type HomeEntry = CollectionEntry<"home">;
 type HomeData = HomeEntry["data"];
@@ -53,6 +54,7 @@ const footer = footerEntry.data;
 ---
 
 <Layout title="NNPC AI - Industrial Automation & Intelligence">
+	<NavBar />
 	<div class="nnpc-page">
 		<Hero
 			eyebrow={hero.eyebrow}
@@ -133,7 +135,7 @@ const footer = footerEntry.data;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		object-position: center 35%;
+		object-position: center;
 		opacity: 1;
 		z-index: 0;
 	}
