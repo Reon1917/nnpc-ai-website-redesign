@@ -16,8 +16,54 @@ import NavBar from "@/components/site/NavBar.astro";
 						and generate visuals without relying on cloud services or technical setup.
 					</p>
 					<div class="ai-cta-row">
-						<a class="ai-cta" href="/#consultation">Try the AI Server</a>
-						<span class="ai-cta-note">On-prem evaluation with your team and data.</span>
+						<a
+							class="ai-cta"
+							href="https://forms.gle/cbdwPGvCMW8GW93H6"
+							target="_blank"
+							rel="noreferrer"
+						>
+							Try the Demo
+						</a>
+						<span class="ai-cta-note">Short intake form for demo access.</span>
+					</div>
+					<div class="ai-hardware-note">
+						<p class="ai-hardware-title">
+							NNPC AI server demo runs on this hardware:
+						</p>
+						<dl class="ai-hardware-grid">
+							<div class="ai-hardware-item">
+								<dt>Chassis</dt>
+								<dd>DRX70</dd>
+							</div>
+							<div class="ai-hardware-item">
+								<dt>MB</dt>
+								<dd>Huananzhi X99 F8</dd>
+							</div>
+							<div class="ai-hardware-item">
+								<dt>PSU</dt>
+								<dd>GWCR-1600D</dd>
+							</div>
+							<div class="ai-hardware-item">
+								<dt>CPU</dt>
+								<dd>Intel Xeon 26734</dd>
+							</div>
+							<div class="ai-hardware-item">
+								<dt>VGA</dt>
+								<dd>AMD AI PRO R9700</dd>
+							</div>
+							<div class="ai-hardware-item">
+								<dt>Memory</dt>
+								<dd>DDR4 ECC 64G (32x2)</dd>
+							</div>
+							<div class="ai-hardware-item">
+								<dt>HDD/SSD</dt>
+								<dd>M.2 KS Gen4 SSD 2TB</dd>
+							</div>
+							<div class="ai-hardware-item">
+								<dt>OS</dt>
+								<dd>Ubuntu 22.04</dd>
+							</div>
+						</dl>
 					</div>
 					<div class="ai-hero-metrics">
 						<div class="ai-metric">
@@ -246,6 +292,52 @@ import NavBar from "@/components/site/NavBar.astro";
 	.ai-cta-note {
 		font-size: 0.95rem;
 		color: rgba(24, 19, 10, 0.6);
+	}
+
+	.ai-hardware-note {
+		margin-bottom: 2.5rem;
+		padding: 1.2rem 1.4rem;
+		border-radius: 1.1rem;
+		background: rgba(255, 255, 255, 0.68);
+		border: 1px solid rgba(24, 19, 10, 0.08);
+		box-shadow: 0 18px 32px rgba(24, 19, 10, 0.08);
+	}
+
+	.ai-hardware-title {
+		margin-bottom: 0.9rem;
+		font-size: 0.85rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: rgba(24, 19, 10, 0.55);
+	}
+
+	.ai-hardware-grid {
+		margin: 0;
+		display: grid;
+		gap: 0.85rem 1.4rem;
+		grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+	}
+
+	.ai-hardware-item {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.ai-hardware-item dt {
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: rgba(24, 19, 10, 0.55);
+	}
+
+	.ai-hardware-item dd {
+		margin: 0;
+		font-size: 0.98rem;
+		line-height: 1.5;
+		letter-spacing: 0.01em;
+		color: rgba(24, 19, 10, 0.72);
 	}
 
 	.ai-hero-metrics {
