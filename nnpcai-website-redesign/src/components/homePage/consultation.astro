@@ -14,12 +14,57 @@ const { eyebrow, title } = Astro.props;
 				</h3>
 			</div>
 
+			<div class="mx-auto mt-8 max-w-3xl text-center">
+				<p class="text-base text-neutral-700">
+					Tell us about your goals and timelines. Our team reviews every
+					request and follows up with a tailored plan within 48 hours.
+				</p>
+				<p class="mt-4 text-sm text-neutral-500">
+					This quick consultation form helps us match you with the right
+					specialist.
+				</p>
+				<a
+					class="nnpc-btn nnpc-btn-primary mt-6 inline-flex items-center justify-center"
+					href="https://form.typeform.com/to/lG8wgeB4"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Contact Us
+				</a>
+			</div>
+			{/*
+			<div class="mt-8">
+				<div
+					class="min-h-[600px] w-full"
+					data-tf-live="01KFHV3MBQM2A9REVX52VHS272"
+				></div>
+				<script
+					is:inline
+					defer
+					src="https://embed.typeform.com/next/embed.js"
+				></script>
+			</div>
+			*/}
+			{/*
 			<form
 				class="mt-8 grid gap-5 md:grid-cols-2"
-				action="#"
+				action="/api/consultation"
 				method="POST"
-				onsubmit="alert('Thank you. Your request has been simulated.'); return false;"
+				data-consultation-form
 			>
+				<div class="sr-only" aria-hidden="true">
+					<label class="nnpc-field-label" for="company_website">
+						Company Website
+					</label>
+					<input
+						class="nnpc-field"
+						type="text"
+						id="company_website"
+						name="company_website"
+						tabindex="-1"
+						autocomplete="off"
+					/>
+				</div>
 				<div>
 					<label class="nnpc-field-label" for="name">Full Name</label>
 					<input
@@ -104,7 +149,58 @@ const { eyebrow, title } = Astro.props;
 				<button class="nnpc-btn nnpc-btn-primary md:col-span-2" type="submit">
 					Request Consultation
 				</button>
+				<p
+					class="text-sm text-neutral-600 md:col-span-2"
+					data-form-status
+					role="status"
+					aria-live="polite"
+				></p>
 			</form>
+			*/}
 		</div>
 	</div>
 </section>
+
+{/*
+<script is:inline>
+	const form = document.querySelector('[data-consultation-form]');
+	if (form) {
+		const status = form.querySelector('[data-form-status]');
+		const submitButton = form.querySelector('button[type="submit"]');
+
+		form.addEventListener('submit', async (event) => {
+			event.preventDefault();
+
+			if (status) status.textContent = 'Sending...';
+			if (submitButton) submitButton.setAttribute('disabled', 'true');
+
+			try {
+				const response = await fetch(form.action, {
+					method: 'POST',
+					body: new FormData(form),
+					headers: { Accept: 'application/json' },
+				});
+				if (response.ok) {
+					if (status)
+						status.textContent = 'Thanks! We will be in touch shortly.';
+					form.reset();
+				} else {
+					const data = await response.json().catch(() => null);
+					let message = 'Something went wrong. Please try again.';
+					if (response.status === 429) {
+						message = 'Too many requests. Please wait and try again.';
+					} else if (data?.error) {
+						message = data.error;
+					}
+					if (status) status.textContent = message;
+				}
+			} catch (error) {
+				if (status)
+					status.textContent = 'Network error. Please try again.';
+			} finally {
+				if (submitButton) submitButton.removeAttribute('disabled');
+			}
+		});
+	}
+</script>
+*/}
